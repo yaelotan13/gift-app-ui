@@ -23,8 +23,8 @@ const Progress = (props) => {
     return (
         <View style={styles.circlesContainer}>
             <View style={ props.curScreen === 'MainCategories' ? [styles.circle, styles.heighlight] : styles.circle } />
-            <View style={ props.curScreen === 'SubCategories' ? [styles.circle, styles.heighlight] : styles.circle} />
-            <View style={styles.circle} />
+            <View style={ props.curScreen === 'SubCategories' ? [styles.circle, styles.heighlight] : styles.circle } />
+            <View style={ props.curScreen === 'PersonalDetails' ? [styles.circle, styles.heighlight] : styles.circle } />
         </View>
     )
 };
