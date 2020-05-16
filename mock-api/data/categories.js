@@ -1,4 +1,5 @@
 import MainCategory from './MainCategory';
+import SubCategory from './SubCategory';
 
 import foodie from '../../assets/images/categories/foodie.png';
 import geeky from '../../assets/images/categories/geeky.png';
@@ -28,6 +29,34 @@ const mainCategories = [
     new MainCategory(12, 'Student', student),
 ]; 
 
+const subCategories = [
+    new SubCategory(1, 'Beach Volleyball', 1),
+    new SubCategory(2, 'BasketBall', 1),
+    new SubCategory(3, 'Running', 1),
+    new SubCategory(4, 'Weight Lifting', 1),
+    new SubCategory(5, 'Swimming', 1),
+    new SubCategory(6, 'Football', 1),
+    new SubCategory(7, 'Yoga', 1),
+    new SubCategory(8, 'Pizza', 2),
+    new SubCategory(9, 'Hamburger', 2),
+    new SubCategory(10, 'Sushi', 2),
+    new SubCategory(11, 'Sweets', 2),
+    new SubCategory(12, 'Star Wars', 3),
+    new SubCategory(13, 'Wonder Women', 3),
+    new SubCategory(14, 'Micky Mouse', 3),
+    new SubCategory(15, 'Outgoing', 4),
+    new SubCategory(16, 'Intovert', 4),
+    new SubCategory(17, 'Competitve', 4),
+    new SubCategory(18, 'Funny', 4),
+    new SubCategory(19, 'Science', 5),
+    new SubCategory(20, 'SuperHeroes', 5),
+    new SubCategory(21, 'Computer Games', 5),
+    new SubCategory(22, 'Fintness', 6),
+    new SubCategory(23, 'Healthy Food', 6),
+    new SubCategory(24, 'Mindfulness', 6),
+];
+
 module.exports = {
-    mainCategories
+    mainCategories,
+    subCategories
 }
