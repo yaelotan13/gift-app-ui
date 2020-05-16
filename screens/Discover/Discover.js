@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
 import bubble from '../../assets/images/bubble.png';
 import bike from '../../assets/images/bike.png';
+import colors from '../../constants/colors';
 
 const styles = StyleSheet.create({
     container: {
@@ -31,17 +32,21 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
     },
     header: {
+        marginTop: 36,
         textAlign: 'center',
         fontSize: 22,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontFamily: 'roboto-bold',
     },
     paragraph: {
+        marginTop: 16,
         fontSize: 16,
-        color: '#4F4F4F'
+        color: colors.grey,
+        fontFamily: 'muli-light',
     },
     buttonAreaContainer: {
-        height: '20%',
-        justifyContent: 'center'
+        height: '30%',
+        justifyContent: 'center',
     },
     buttonContainer: {
         marginLeft: '22%' // TODO center
@@ -50,11 +55,11 @@ const styles = StyleSheet.create({
         width: 212,
         height: 50,
         borderRadius: 60,
-        backgroundColor: '#D04460',
+        backgroundColor: colors.primary,
         justifyContent: 'center'
     },
     discoverText: {
-        color:'#fff',
+        color: colors.white,
         textAlign:'center',
         paddingLeft : 10,
         paddingRight : 10,
@@ -65,17 +70,16 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },  
     haveAnAccount: {
-        color: '#828282',
+        color: colors.lightGrey,
         marginRight: 3
     },
     signIn: {
         textDecorationLine: 'underline',
-        color: '#4F4F4F'
+        color: colors.lightGrey
     }
 });
 
 const Discover = (props) => {
-    console.log(props);
     const handlePress = () => {
         props.navigation.navigate({ routeName: 'MainCategories' })
     };
