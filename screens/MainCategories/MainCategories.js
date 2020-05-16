@@ -7,7 +7,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { mainCategories } from '../../mock-api/data/categories';
 import HeaderButton from '../../navigation/HeaderButton';
 import colors from '../../constants/colors';
-import { Header } from '../../components/layout';
+import { Header, Search } from '../../components/layout';
 import { storeSelecedMainCategories } from '../../store/categories/actions';
 
 const styles = StyleSheet.create({
@@ -64,6 +64,7 @@ const CheckMark = () =>
 
 const MainCategories = (props) => {
     const [selected, setSelected] = useState([]);
+    const [searchText, setSearchText] = useState('')
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -95,6 +96,7 @@ const MainCategories = (props) => {
     return (
         <ScrollView style={styles.conatiner}>
             <Header header="Let's Get You Started" subHeader="Select a few hobbies and interests to get started." />
+            {/* <Search placeholder="Search for hobbies" value={searchText} onChange={() => {}} /> */}
             <SafeAreaView style={styles.listContainer}>
                 <FlatList 
                     data={mainCategories}

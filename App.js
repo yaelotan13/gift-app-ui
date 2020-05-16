@@ -18,6 +18,7 @@ const fetchFonts = () => {
   return Font.loadAsync({
     'roboto': require('./assets/fonts/Roboto-Regular.ttf'),
     'roboto-bold': require('./assets/fonts/Roboto-Bold.ttf'),
+    'muli-bold': require('./assets/fonts/Muli-Bold.ttf'),
     'muli-extra-light': require('./assets/fonts/Muli-ExtraLight.ttf'),
     'muli-light': require('./assets/fonts/Muli-Light.ttf'),
     'muli': require('./assets/fonts/Muli-Regular.ttf')
