@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Text, FlatList, View, StyleSheet, SafeAreaView, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { AntDesign } from '@expo/vector-icons';
@@ -6,6 +7,8 @@ import { AntDesign } from '@expo/vector-icons';
 import { mainCategories } from '../../mock-api/data/categories';
 import HeaderButton from '../../navigation/HeaderButton';
 import colors from '../../constants/colors';
+
+import { storeSelecedMainCategories } from '../../store/categories/actions';
 
 const styles = StyleSheet.create({
     container: {
@@ -75,6 +78,11 @@ const CheckMark = () =>
 
 const MainCategories = (props) => {
     const [selected, setSelected] = useState([]);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(storeSelecedMainCategories([...selected]))
+    }, [selected]);
 
     const categoryPressed = (category) => {
         if (selected.indexOf(category) < 0) {
@@ -122,7 +130,14 @@ MainCategories.navigationOptions = navigationData => {
     return {
         headerRight: 
         <HeaderButtons HeaderButtonComponent={HeaderButton}>
-            <Item title='Next' iconName="rightcircle" color={colors.primary} onPress={() => navigationData.navigation.navigate({ routeName: 'SubCategories' })} />
+            <Item 
+                title='Next' 
+                iconName="rightcircle" 
+                color={colors.primary} 
+                onPress={() => {
+                    navigationData.navigation.getParam('selectedMainCategories')();
+                    navigationData.navigation.navigate({ routeName: 'SubCategories' })
+                }} />
         </HeaderButtons>,
         headerLeft: ''
     }

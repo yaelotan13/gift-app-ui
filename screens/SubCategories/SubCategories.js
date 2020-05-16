@@ -2,6 +2,8 @@ import React from 'react';
 import { ScrollView, StyleSheet, Text } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
+import { useSelector } from '../../hooks';
+import { mainCategoriesSelector } from '../../store/selectors/categories';
 import HeaderButton from '../../navigation/HeaderButton';
 import colors from '../../constants/colors';
 
@@ -12,6 +14,8 @@ const styles = StyleSheet.create({
 });
 
 const SubCategories = (props) => {
+    const mainCategories = useSelector(mainCategoriesSelector);
+    console.log(mainCategories);
     return (
         <ScrollView style={styles.container}>
             <Text>Let's Get More Specific</Text>
