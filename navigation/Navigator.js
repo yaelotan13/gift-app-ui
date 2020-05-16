@@ -9,6 +9,7 @@ import { createDrawerNavigator } from 'react-navigation-drawer';
 import DiscoverScreen from '../screens/Discover';
 import MainCategoriesScreen from '../screens/MainCategories';
 import SubCategoriesScreen from '../screens/SubCategories';
+import PersonalDetailsScreen from '../screens/PersonalDetails';
 
 import Progress from '../components/layout/Progress';
 
@@ -27,6 +28,12 @@ const Navigator = createStackNavigator({
         screen: SubCategoriesScreen,
         navigationOptions: { 
             title: <Progress curScreen="SubCategories" />, 
+        },
+    },
+    PersonalDetails: {
+        screen: PersonalDetailsScreen,
+        navigationOptions: { 
+            title: <Progress curScreen="PersonalDetails" />, 
         },
     }
 });

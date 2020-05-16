@@ -36,7 +36,7 @@ SubCategories.navigationOptions = navigationData => {
     return {
         headerRight: 
         <HeaderButtons HeaderButtonComponent={HeaderButton}>
-            <Item title='Next' iconName="rightcircle" color={colors.primary} onPress={() => navigationData.navigation.navigate({ routeName: 'SubCategories' })} />
+            <Item title='Next' iconName="rightcircle" color={colors.primary} onPress={() => navigationData.navigation.navigate({ routeName: 'PersonalDetails' })} />
         </HeaderButtons>,
         headerLeft:
         <HeaderButtons HeaderButtonComponent={HeaderButton}>
