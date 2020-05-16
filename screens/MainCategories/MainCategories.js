@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Text, FlatList, View, StyleSheet, SafeAreaView, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import { AntDesign } from '@expo/vector-icons';
 
 import { mainCategories } from '../../mock-api/data/categories';
 import HeaderButton from '../../navigation/HeaderButton';
@@ -50,13 +51,12 @@ const styles = StyleSheet.create({
       checked: {
         height: 126,
         borderRadius: 10,
-        backgroundColor: 'rgba(0, 0, 0, .3)', 
-        justifyContent: 'center'
+        backgroundColor: 'rgba(0, 0, 0, .4)', 
+        justifyContent: 'center',
+        alignItems: 'center'
       },
       checkmark: {
           zIndex: 2,
-          width: 30,
-          height: 30,
       },
       title: {
         fontSize: 14,
@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
 
 const CheckMark = () => 
     <View style={styles.checked}>
+        <AntDesign style={styles.checkmark} name="check" size={54} color="white" />
     </View>;
 
 const MainCategories = (props) => {
