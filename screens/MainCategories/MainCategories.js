@@ -119,14 +119,11 @@ const MainCategories = (props) => {
 
 MainCategories.navigationOptions = navigationData => {
     return {
-        headerTitle: 'o  o  o',
         headerRight: 
         <HeaderButtons HeaderButtonComponent={HeaderButton}>
-            <Item title='Next' iconName='arrow-forward-outline' onPress={() => {console.log(navigationData.navigation)}} />
+            <Item title='Next' iconName="rightcircle" color={colors.primary} onPress={() => navigationData.navigation.navigate({ routeName: 'SubCategories' })} />
         </HeaderButtons>,
-        headerStyle: {
-        //   backgroundColor: '#f4511e',
-        },
+        headerLeft: ''
     }
 }
 

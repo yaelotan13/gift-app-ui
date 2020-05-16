@@ -10,6 +10,8 @@ import DiscoverScreen from '../screens/Discover';
 import MainCategoriesScreen from '../screens/MainCategories';
 import SubCategoriesScreen from '../screens/SubCategories';
 
+import Progress from '../components/layout/Progress';
+
 const Navigator = createStackNavigator({
     Discover: {
         screen: DiscoverScreen, 
@@ -18,13 +20,14 @@ const Navigator = createStackNavigator({
     MainCategories: {
         screen: MainCategoriesScreen,
         navigationOptions: { 
-            // title: 'o  o  o', 
-            // headerRight: <Button onPress={() => {}} title="Next" />, 
+            title: <Progress curScreen="MainCategories" />, 
         },
     },
-    SubCategoriesScreen: {
+    SubCategories: {
         screen: SubCategoriesScreen,
-        navigationOptions: { title: '' },
+        navigationOptions: { 
+            title: <Progress curScreen="SubCategories" />, 
+        },
     }
 });
 
