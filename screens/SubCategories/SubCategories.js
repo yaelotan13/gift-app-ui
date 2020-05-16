@@ -6,6 +6,7 @@ import { useSelector } from '../../hooks';
 import { mainCategoriesSelector } from '../../store/selectors/categories';
 import HeaderButton from '../../navigation/HeaderButton';
 import colors from '../../constants/colors';
+import { Header } from '../../components/layout';
 
 import { subCategories as allSubCategories } from '../../mock-api/data/categories';
 
@@ -26,11 +27,7 @@ const SubCategories = (props) => {
 
     return (
         <ScrollView style={styles.container}>
-            <Text>Let's Get More Specific</Text>
-            <Text>You chose:</Text>
-            {
-                subCategories.map(category => <Text>{category.sub_category_name}</Text>)
-            }
+            <Header header="Let's Get More Specific" subHeader="Choose sub-categories that intests you the most." />
         </ScrollView>
     );
 };

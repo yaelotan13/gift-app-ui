@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import bubble from '../../assets/images/bubble.png';
 import bike from '../../assets/images/bike.png';
 import colors from '../../constants/colors';
+import { Header } from '../../components/layout';
 
 const styles = StyleSheet.create({
     container: {
@@ -90,10 +91,7 @@ const Discover = (props) => {
                 <Image source={bubble} style={styles.bubbleImg} />
                 <Image source={bike} style={styles.bikeImg} />
             </View>
-            <View style={styles.contentContainer}>
-                <Text style={styles.header}>Discover Your Next Gift</Text>
-                <Text style={styles.paragraph}>This is a paragraph that would explain more about why this app is so amazing and why you should use it every day</Text>
-            </View>
+            <Header header="Discover Your Next Gift" subHeader="This is a paragraph that would explain more about why this app is so amazing and why you should use it every day" />
             <View style={styles.buttonAreaContainer}>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
