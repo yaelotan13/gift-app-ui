@@ -1,7 +1,8 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
+    "start": "REACT_APP_GIFTS_API_BASE_HOST=http://localhost:3533/ expo start -c",
+    "giftsApi": "lite-server --config=mock-api/gifts-mock-api.js",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
@@ -9,8 +10,10 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.6",
+    "cors": "^2.8.5",
     "expo": "~37.0.3",
     "expo-font": "~8.1.0",
+    "express": "^4.17.1",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
