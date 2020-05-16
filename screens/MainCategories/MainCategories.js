@@ -7,7 +7,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { mainCategories } from '../../mock-api/data/categories';
 import HeaderButton from '../../navigation/HeaderButton';
 import colors from '../../constants/colors';
-
+import { Header } from '../../components/layout';
 import { storeSelecedMainCategories } from '../../store/categories/actions';
 
 const styles = StyleSheet.create({
@@ -22,20 +22,6 @@ const styles = StyleSheet.create({
       },
       headerContainer: {
         marginTop: 26,
-      },
-      header: {
-        fontFamily: 'roboto-bold',
-        textAlign: 'center',
-        fontSize: 20,
-        fontWeight: 'bold'
-      },
-      subHeader: {
-        fontSize: 16,
-        color: colors.grey,
-        marginTop: 16,
-        marginHorizontal: 46,
-        textAlign: 'center',
-        fontFamily: 'muli'
       },
       mainCategoriesContainer: {
 
@@ -90,7 +76,6 @@ const MainCategories = (props) => {
         } else {
             setSelected(selected => selected.filter(curCategory => curCategory !== category));
         }
-       
     };
 
     const renderMainCategory = (itemData) => {
@@ -109,10 +94,7 @@ const MainCategories = (props) => {
 
     return (
         <ScrollView style={styles.conatiner}>
-            <View style={styles.headerContainer}>
-                <Text style={styles.header}>Let's Get You Started</Text>
-                <Text style={styles.subHeader}>Select a few hobbies and interests to get started.</Text>
-            </View>
+            <Header header="Let's Get You Started" subHeader="Select a few hobbies and interests to get started." />
             <SafeAreaView style={styles.listContainer}>
                 <FlatList 
                     data={mainCategories}
@@ -135,7 +117,6 @@ MainCategories.navigationOptions = navigationData => {
                 iconName="rightcircle" 
                 color={colors.primary} 
                 onPress={() => {
-                    navigationData.navigation.getParam('selectedMainCategories')();
                     navigationData.navigation.navigate({ routeName: 'SubCategories' })
                 }} />
         </HeaderButtons>,
