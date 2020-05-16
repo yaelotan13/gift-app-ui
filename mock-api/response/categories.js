@@ -5,6 +5,12 @@ const getMainCategories = (req, res) => {
     res.status(200).send(categoriesMock.mainCategories)
 };
 
+const getSubCategories = (req, res) => {
+    console.log('[GET] /categories/main');
+    res.status(200).send(categoriesMock.subCategories)
+};
+
 module.exports = {
-    getMainCategories
+    getMainCategories,
+    getSubCategories
 }
