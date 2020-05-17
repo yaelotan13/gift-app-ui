@@ -135,22 +135,20 @@ const SubCategories = (props) => {
 
     return (
         <View>
-                {
-                    mainCategories.length === 0 ? 
-                    renderNoMainCategoriesSelectedMessgae()
-                    :
-                            <FlatList
-                                ListHeaderComponent={<Header header="Let's Get More Specific" subHeader="Choose sub-categories that intests you the most." />}
-                                ListHeaderComponentStyle={styles.header}
-                                style={styles.categoriesList}
-                                data={mainCategories}
-                                renderItem={renderSubCategories}
-                                keyExtractor={itemData => itemData.main_category_id}
-                                numColumns={1}
-                                ListFooterComponent={<Text></Text>}
-                                ListFooterComponentStyle={styles.footer}
-                            />
-                }
+            {mainCategories.length === 0 ? 
+            renderNoMainCategoriesSelectedMessgae()
+            :
+            <FlatList
+                ListHeaderComponent={<Header header="Let's Get More Specific" subHeader="Choose sub-categories that intests you the most." />}
+                ListHeaderComponentStyle={styles.header}
+                style={styles.categoriesList}
+                data={mainCategories}
+                renderItem={renderSubCategories}
+                keyExtractor={itemData => itemData.main_category_id + " "}
+                numColumns={1}
+                ListFooterComponent={<Text></Text>}
+                ListFooterComponentStyle={styles.footer}
+            />}
         </View>
 
     );
@@ -158,11 +156,11 @@ const SubCategories = (props) => {
 
 SubCategories.navigationOptions = navigationData => {
     return {
-        headerRight: 
+        headerRight: () =>
         <HeaderButtons HeaderButtonComponent={HeaderButton}>
             <Item title='Next' iconName="rightcircle" color={colors.primary} onPress={() => navigationData.navigation.navigate({ routeName: 'PersonalDetails' })} />
         </HeaderButtons>,
-        headerLeft:
+        headerLeft: () =>
         <HeaderButtons HeaderButtonComponent={HeaderButton}>
             <Item title='Prev' iconName="leftcircle" color={colors.primary} onPress={() => navigationData.navigation.navigate({ routeName: 'MainCategories' })} />
         </HeaderButtons>,

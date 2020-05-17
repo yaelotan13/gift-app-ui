@@ -10,21 +10,19 @@ import colors from '../../constants/colors';
 import { Header, Search } from '../../components/layout';
 import { storeSelecedMainCategories } from '../../store/categories/actions';
 
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: 'white'
-    },  
+const styles = StyleSheet.create({ 
     listContainer: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        marginHorizontal: 16,
-        marginTop: 36,
+        width: '100%',
       },
       headerContainer: {
-        marginTop: 26,
+        marginBottom: 26,
+      },
+      footer: {
+        marginBottom: 10
       },
       mainCategoriesContainer: {
-
+          paddingLeft: 12,
+          paddingRight: 12
       },
       mainCategory: {
         marginVertical: 8,
@@ -94,25 +92,26 @@ const MainCategories = (props) => {
     };
 
     return (
-        <ScrollView style={styles.conatiner}>
-            <Header header="Let's Get You Started" subHeader="Select a few hobbies and interests to get started." />
+        <View style={styles.listContainer}>
             {/* <Search placeholder="Search for hobbies" value={searchText} onChange={() => {}} /> */}
-            <SafeAreaView style={styles.listContainer}>
-                <FlatList 
-                    data={mainCategories}
-                    renderItem={renderMainCategory}
-                    numColumns={3}
-                    keyExtractor={itemData => itemData.main_category_id}
-                    style={styles.mainCategoriesContainer}
-                />
-            </SafeAreaView>
-        </ScrollView>
+            <FlatList 
+                ListHeaderComponent={<Header header="Let's Get You Started" subHeader="Select a few hobbies and interests to get started." />}
+                ListHeaderComponentStyle={styles.headerContainer}
+                data={mainCategories}
+                renderItem={renderMainCategory}
+                numColumns={3}
+                keyExtractor={itemData => itemData.main_category_id + " "}
+                style={styles.mainCategoriesContainer}
+                ListFooterComponent={<View />}
+                ListFooterComponentStyle={styles.footer}
+            />
+        </View>
     )
 };
 
 MainCategories.navigationOptions = navigationData => {
     return {
-        headerRight: 
+        headerRight: () =>
         <HeaderButtons HeaderButtonComponent={HeaderButton}>
             <Item 
                 title='Next' 
@@ -122,7 +121,7 @@ MainCategories.navigationOptions = navigationData => {
                     navigationData.navigation.navigate({ routeName: 'SubCategories' })
                 }} />
         </HeaderButtons>,
-        headerLeft: ''
+        headerLeft: () => ''
     }
 }
 
