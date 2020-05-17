@@ -12,6 +12,19 @@ import { subCategories as allSubCategories } from '../../mock-api/data/categorie
 
 const styles = StyleSheet.create({
     container: {
+        height: '100%'
+    },
+    noMainCategoriesSelected: {
+        
+    },
+    categoriesList: {
+        height: '100%',
+    },
+    header: {
+        marginBottom: 30
+    },
+    footer: {
+        paddingBottom: 50
     },
     spinner: {
         marginTop: '20%'
@@ -22,11 +35,18 @@ const styles = StyleSheet.create({
     subCategoryContainer: {
         width: '90%',
         marginLeft: '5%',
-        borderWidth: 1,
         marginTop: '5%',
         borderRadius: 15,
-        borderColor: colors.superLightGrey,
-        padding: 20
+        padding: 20,
+        shadowColor: colors.black,
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.36,
+        shadowRadius: 6,
+        backgroundColor: 'white'
+
     },
     mainCategoryTitle: {
         fontFamily: 'muli-bold',
@@ -43,8 +63,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginRight: 10,
         marginTop: 10,
-        padding: 12,
-        paddingHorizontal: 16,
+        padding: 10,
+        paddingHorizontal: 12,
         borderColor: colors.lightGrey
     },
     heighlight: {
@@ -70,16 +90,20 @@ const SubCategories = (props) => {
     const categoryPressed = (subCategory) => {
         if (selected.indexOf(subCategory) < 0) {
             console.log('adding the sub category');
+            console.log(subCategory);
+            console.log(selected);
             setSelected(selected => selected.concat(subCategory))
         } else {
             console.log('deleting the sub category');
+            console.log(subCategory);
+            console.log(selected);
             setSelected(selected => selected.filter(category => category !== subCategory));
         }
     };
 
     const renderSubCategory = (itemData) => (
-        <TouchableOpacity onPress={() => categoryPressed(itemData.item)}>
-            <View style={selected.indexOf(itemData.item) > 0 ? [styles.subCategory, styles.heighlight] : styles.subCategory}>
+        <TouchableOpacity onPress={() => categoryPressed(itemData.item.sub_category_id)}>
+            <View style={selected.indexOf(itemData.item.sub_category_id) > 0 ? [styles.subCategory, styles.heighlight] : styles.subCategory}>
                 <Text style={styles.subCategoryTitle}>{itemData.item.sub_category_name}</Text>
             </View>
         </TouchableOpacity>
@@ -89,9 +113,7 @@ const SubCategories = (props) => {
         const releventSubCategories = subCategories.filter(subCategory => subCategory.main_category_id === itemData.item.main_category_id);
 
         return (
-            <TouchableOpacity 
-                style={styles.subCategoryContainer}
-            >
+            <View style={styles.subCategoryContainer}>                
                 <Text style={styles.mainCategoryTitle}>{itemData.item.main_category_name}</Text>
                 <FlatList
                     style={styles.subCategoriesItemsContainer}
@@ -99,23 +121,38 @@ const SubCategories = (props) => {
                     renderItem={renderSubCategory}
                     keyExtractor={itemData => itemData.sub_category_id}
                 />
-            </TouchableOpacity>
+            </View>
+        )
+    };
+
+    const renderNoMainCategoriesSelectedMessgae = () => {
+        return (
+            <View style={styles.noMainCategoriesSelected}>
+                <Text>You didn't select any categories...</Text>
+            </View>
         )
     };
 
     return (
-        <ScrollView style={styles.container}>
-            <Header header="Let's Get More Specific" subHeader="Choose sub-categories that intests you the most." />
-            <SafeAreaView style={styles.subCategoriesContainer}>
-                <FlatList
-                    data={mainCategories}
-                    renderItem={renderSubCategories}
-                    keyExtractor={itemData => itemData.main_category_id}
-                    numColumns={1}
-                />
-                {/* {mainCategories.length === 0 && <ActivityIndicator style={styles.spinner} size="large" color={colors.secondaryDark} />} */}
-            </SafeAreaView>
-        </ScrollView>
+        <View>
+                {
+                    mainCategories.length === 0 ? 
+                    renderNoMainCategoriesSelectedMessgae()
+                    :
+                            <FlatList
+                                ListHeaderComponent={<Header header="Let's Get More Specific" subHeader="Choose sub-categories that intests you the most." />}
+                                ListHeaderComponentStyle={styles.header}
+                                style={styles.categoriesList}
+                                data={mainCategories}
+                                renderItem={renderSubCategories}
+                                keyExtractor={itemData => itemData.main_category_id}
+                                numColumns={1}
+                                ListFooterComponent={<Text></Text>}
+                                ListFooterComponentStyle={styles.footer}
+                            />
+                }
+        </View>
+
     );
 };
 
