@@ -4,11 +4,13 @@ import { Text, FlatList, View, StyleSheet, SafeAreaView, ImageBackground, Toucha
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { AntDesign } from '@expo/vector-icons';
 
-import { mainCategories } from '../../mock-api/data/categories';
+// import { mainCategories } from '../../mock-api/data/categories';
 import HeaderButton from '../../navigation/HeaderButton';
 import colors from '../../constants/colors';
 import { Header, Search } from '../../components/layout';
-import { storeSelecedMainCategories } from '../../store/categories/actions';
+import { storeSelecedMainCategories, searchMainCategories } from '../../store/categories/actions';
+import { categoriesSelector, filteredMainCategoriesSelector } from '../../store/selectors/categories';
+import { useSelector } from '../../hooks';
 
 const styles = StyleSheet.create({ 
     listContainer: {
@@ -62,8 +64,10 @@ const CheckMark = () =>
 
 const MainCategories = (props) => {
     const [selected, setSelected] = useState([]);
-    const [searchText, setSearchText] = useState('')
+    const [searchText, setSearchText] = useState('');
     const dispatch = useDispatch();
+    const categoriesState = useSelector(categoriesSelector);
+    const filteredMainCategories = useSelector(filteredMainCategoriesSelector);
 
     useEffect(() => {
         dispatch(storeSelecedMainCategories([...selected]))
@@ -91,20 +95,32 @@ const MainCategories = (props) => {
         )
     };
 
+    const handleSearchTextChange = (text) => {
+        setSearchText(text);
+        dispatch(searchMainCategories(text));
+    };
+
     return (
         <View style={styles.listContainer}>
-            {/* <Search placeholder="Search for hobbies" value={searchText} onChange={() => {}} /> */}
+            {categoriesState.loading ?
+            <ActivityIndicator size="large" color="#0000ff" />
+            :
             <FlatList 
-                ListHeaderComponent={<Header header="Let's Get You Started" subHeader="Select a few hobbies and interests to get started." />}
+                ListHeaderComponent={
+                    <View>
+                        <Header header="Let's Get You Started" subHeader="Select a few hobbies and interests to get started." />
+                        <Search placeholder="Search for categories" value={searchText} onChange={handleSearchTextChange} />
+                    </View>
+                }
                 ListHeaderComponentStyle={styles.headerContainer}
-                data={mainCategories}
+                data={filteredMainCategories}
                 renderItem={renderMainCategory}
                 numColumns={3}
                 keyExtractor={itemData => itemData.main_category_id + " "}
                 style={styles.mainCategoriesContainer}
                 ListFooterComponent={<View />}
                 ListFooterComponentStyle={styles.footer}
-            />
+            />}
         </View>
     )
 };

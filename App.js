@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import { Provider } from 'react-redux';
-import { combineReducers, createStore } from 'redux';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 
 import Navigator from './navigation/Navigator';
 import categoryReducer from './store/categories/reducer';
+import rootSaga from './store/saga';
 
 const rootReducer = combineReducers({
   categories: categoryReducer, 
 });
 
-const store = createStore(rootReducer);
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(rootSaga);
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -44,6 +48,3 @@ export default function App() {
     </Provider>
   )
 }
-
-const styles = StyleSheet.create({
-});

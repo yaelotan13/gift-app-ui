@@ -6,31 +6,29 @@ import colors from '../../constants/colors';
 
 const styles = StyleSheet.create({
     inputContainer: {
-        flex: 1,
         marginLeft: '5%',
         marginTop: '5%',
         height: 40,
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center',
-        borderWidth: 1,
+        alignItems: 'flex-start',
         borderRadius: 20,
-        borderColor: colors.superLightGrey,
         width: '70%',
         paddingLeft: 20,
-        // shadowColor: '#000',
-        // shadowOffset: { width: 0, height: 1 },
-        // shadowOpacity: 0.8,
-        // shadowRadius: 4, 
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.26,
+        shadowRadius: 6, 
+        backgroundColor: 'white'
     },
     icon: {
         width: 20,
         height: 20,
-        marginTop: 24
+        marginTop: 12,
     },
     input: {
         flex: 1,
-        paddingTop: 24,
+        paddingTop: 12,
         paddingLeft: 0,
         color: colors.superLightGrey,
         paddingLeft: 15,
