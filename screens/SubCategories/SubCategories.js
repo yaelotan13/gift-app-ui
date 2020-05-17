@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, StyleSheet, Text, SafeAreaView, FlatList, ActivityIndicator, TouchableOpacity, View } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { StyleSheet, Text, FlatList, ActivityIndicator, TouchableOpacity, View } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import { useSelector } from '../../hooks';
-import { mainCategoriesSelector } from '../../store/selectors/categories';
+import { categoriesSelector, filteredSubCategoriesSelector } from '../../store/selectors/categories';
 import HeaderButton from '../../navigation/HeaderButton';
 import colors from '../../constants/colors';
 import { Header, Search } from '../../components/layout';
-
-import { subCategories as allSubCategories } from '../../mock-api/data/categories';
+import { storeReleventSubCategories, searchSubCategories } from '../../store/categories/actions';
 
 const styles = StyleSheet.create({
     container: {
@@ -78,14 +78,22 @@ const styles = StyleSheet.create({
 });
 
 const SubCategories = (props) => {
+    const dispatch = useDispatch();
     const [selected, setSelected] = useState([]);
     const [subCategories, setSubCategories] = useState([]);
-    const mainCategories = useSelector(mainCategoriesSelector);
+    const [searchText, setSearchText] = useState('');
+    const categoriesState = useSelector(categoriesSelector);
+    const filteredSubCategories = useSelector(filteredSubCategoriesSelector);
+    const { selectedMainCategories, allSubCategories } = categoriesState;
 
     useEffect(() => {
-        const mainCategoriesIds = Array.from(mainCategories, category => category.main_category_id);
+        const mainCategoriesIds = Array.from(selectedMainCategories, category => category.main_category_id);
         setSubCategories([...allSubCategories.filter(subCategory => mainCategoriesIds.indexOf(subCategory.main_category_id) > -1)]);
     }, []);
+
+    useEffect(() => {
+        dispatch(storeReleventSubCategories(subCategories));
+    }, [subCategories]);
 
     const categoryPressed = (subCategory) => {
         if (selected.indexOf(subCategory) < 0) {
@@ -110,7 +118,7 @@ const SubCategories = (props) => {
     );
 
     const renderSubCategories = (itemData) => {
-        const releventSubCategories = subCategories.filter(subCategory => subCategory.main_category_id === itemData.item.main_category_id);
+        const releventSubCategories = filteredSubCategories.filter(subCategory => subCategory.main_category_id === itemData.item.main_category_id);
 
         return (
             <View style={styles.subCategoryContainer}>                
@@ -133,18 +141,28 @@ const SubCategories = (props) => {
         )
     };
 
+    const handleSearchTextChange = (text) => {
+        setSearchText(text);
+        dispatch(searchSubCategories(text));
+    };
+
     return (
         <View>
-            {mainCategories.length === 0 ? 
+            {selectedMainCategories.length === 0 ? 
             renderNoMainCategoriesSelectedMessgae()
             :
             <FlatList
-                ListHeaderComponent={<Header header="Let's Get More Specific" subHeader="Choose sub-categories that intests you the most." />}
+                ListHeaderComponent={
+                    <View>
+                        <Header header="Let's Get More Specific" subHeader="Choose sub-categories that intests you the most." />
+                        <Search placeholder="Search for categories" value={searchText} onChange={handleSearchTextChange} />
+                    </View>
+                }
                 ListHeaderComponentStyle={styles.header}
                 style={styles.categoriesList}
-                data={mainCategories}
+                data={selectedMainCategories}
                 renderItem={renderSubCategories}
-                keyExtractor={itemData => itemData.main_category_id + " "}
+                keyExtractor={itemData => itemData.main_category_id.toString()}
                 numColumns={1}
                 ListFooterComponent={<Text></Text>}
                 ListFooterComponentStyle={styles.footer}

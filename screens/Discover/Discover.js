@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
 import bubble from '../../assets/images/bubble.png';
 import bike from '../../assets/images/bike.png';
 import colors from '../../constants/colors';
 import { Header } from '../../components/layout';
+import { fetchAllCategories } from '../../store/categories/actions';
 
 const styles = StyleSheet.create({
     container: {
@@ -50,7 +52,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     buttonContainer: {
-        marginLeft: '22%' // TODO center
+        marginLeft: '22%' 
     },
     button: {
         width: 212,
@@ -81,6 +83,12 @@ const styles = StyleSheet.create({
 });
 
 const Discover = (props) => {
+    const dispatch = useDispatch();
+  
+    useEffect(() => {
+      dispatch(fetchAllCategories());
+    }, []);
+
     const handlePress = () => {
         props.navigation.navigate({ routeName: 'MainCategories' })
     };
