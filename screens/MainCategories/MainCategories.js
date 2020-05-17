@@ -12,7 +12,7 @@ import { storeSelecedMainCategories } from '../../store/categories/actions';
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: colors.white,
+        backgroundColor: 'white'
     },  
     listContainer: {
         flexDirection: 'row',

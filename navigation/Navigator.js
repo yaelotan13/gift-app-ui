@@ -35,7 +35,8 @@ const Navigator = createStackNavigator({
         navigationOptions: { 
             title: <Progress curScreen="PersonalDetails" />, 
         },
-    }
+    },
+    
 });
 
 export default createAppContainer(Navigator);
