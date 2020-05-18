@@ -10,8 +10,9 @@ import { fetchAllCategories } from '../../store/categories/actions';
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 56,
+        paddingTop: 56,
         height: '100%',
+        backgroundColor: 'white',
     },
     imageContainer: {
         alignItems: 'center',

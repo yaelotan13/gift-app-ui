@@ -2,9 +2,9 @@
   "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 15370,
+  "packagerPid": 24255,
   "expoServerNgrokUrl": "https://mq-3be.anonymous.gift-app.exp.direct",
   "packagerNgrokUrl": "https://packager.mq-3be.anonymous.gift-app.exp.direct",
-  "ngrokPid": 15381,
+  "ngrokPid": 24266,
   "webpackServerPort": null
 }

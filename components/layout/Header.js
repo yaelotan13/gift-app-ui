@@ -5,7 +5,7 @@ import colors from '../../constants/colors';
 
 const styles = StyleSheet.create({
     headerContainer: {
-        marginTop: 26,
+        marginVertical: 26
     },
     header: {
         fontFamily: 'roboto-bold',
