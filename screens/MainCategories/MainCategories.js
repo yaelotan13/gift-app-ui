@@ -15,30 +15,32 @@ import { useSelector } from '../../hooks';
 const styles = StyleSheet.create({ 
     listContainer: {
         width: '100%',
+        backgroundColor: 'white'
       },
       headerContainer: {
-        marginBottom: 26,
+        marginBottom: 46,
       },
       footer: {
         marginBottom: 10
       },
       mainCategoriesContainer: {
-          paddingLeft: 12,
+          paddingLeft: 16,
           paddingRight: 12
       },
       mainCategory: {
-        marginVertical: 8,
+        marginVertical: 4,
         marginHorizontal: 8,
-        width: '28%',
+        width: '29%',
         height: 150,
         overflow: 'hidden',
       },
       image: {
-        height: 126,
+        backgroundColor: colors.secondary,
+        height: 96,
         borderRadius: 10,
       },
       checked: {
-        height: 126,
+        height: 96,
         borderRadius: 10,
         backgroundColor: 'rgba(0, 0, 0, .4)', 
         justifyContent: 'center',
@@ -87,7 +89,7 @@ const MainCategories = (props) => {
                 style={styles.mainCategory}
                 onPress={() => categoryPressed(itemData.item)}
             >
-                <ImageBackground imageStyle={{ borderRadius: 6}} style={styles.image} source={itemData.item.main_category_image} >
+                <ImageBackground imageStyle={{ borderRadius: 10, width: '60%', height: '60%', marginLeft: '20%', marginTop: '15%'}} style={styles.image} source={itemData.item.main_category_image} >
                     { selected.indexOf(itemData.item) > -1 && <CheckMark />} 
                 </ImageBackground>
                 <Text style={styles.title}>{itemData.item.main_category_name}</Text>

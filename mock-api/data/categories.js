@@ -1,22 +1,48 @@
 import MainCategory from './MainCategory';
 import SubCategory from './SubCategory';
 
-import foodie from '../../assets/images/categories/foodie.png';
-import geeky from '../../assets/images/categories/geeky.png';
-import movie from '../../assets/images/categories/movie.jpg';
-import personality from '../../assets/images/categories/personality.jpg';
-import sport from '../../assets/images/categories/sport.jpeg';
-import student from '../../assets/images/categories/student.jpg';
-import healthyLiving from '../../assets/images/categories/healthy-living.png';
-import craft from '../../assets/images/categories/craft.jpeg';
-import art from '../../assets/images/categories/art.jpeg';
-import gadget from '../../assets/images/categories/gadget.jpg';
-import occupation from '../../assets/images/categories/occupation.png';
-import spiritual from '../../assets/images/categories/spiritual.jpeg';
+// import foodie from '../../assets/images/categories/foodie.png';
+// import geeky from '../../assets/images/categories/geeky.png';
+// import movie from '../../assets/images/categories/movie.jpg';
+// import personality from '../../assets/images/categories/personality.jpg';
+// import sport from '../../assets/images/categories/sport.jpeg';
+// import student from '../../assets/images/categories/student.jpg';
+// import healthyLiving from '../../assets/images/categories/healthy-living.png';
+// import craft from '../../assets/images/categories/craft.jpeg';
+// import art from '../../assets/images/categories/art.jpeg';
+// import gadget from '../../assets/images/categories/gadget.jpg';
+// import occupation from '../../assets/images/categories/occupation.png';
+// import spiritual from '../../assets/images/categories/spiritual.jpeg';
+
+// import foodie from '../../assets/images/categories-v2/foodie.png';
+// import geeky from '../../assets/images/categories-v2/geeky.jpeg';
+// import movie from '../../assets/images/categories-v2/movies.jpeg';
+// import personality from '../../assets/images/categories-v2/persons.jpeg';
+// import sport from '../../assets/images/categories-v2/Sports.png';
+// import student from '../../assets/images/categories-v2/Student.png';
+// import healthyLiving from '../../assets/images/categories-v2/healthy-lifestyle.jpeg';
+// import craft from '../../assets/images/categories-v2/hobbies.png';
+// import art from '../../assets/images/categories-v2/art.jpeg';
+// import gadget from '../../assets/images/categories-v2/Gadegts.png';
+// import occupation from '../../assets/images/categories-v2/work.jpeg';
+// import spiritual from '../../assets/images/categories-v2/spiritual.jpeg';
+
+import pizza from '../../assets/images/categories-icons/pizza.png';
+import gadget from '../../assets/images/categories-icons/gadget.png';
+import geeky from '../../assets/images/categories-icons/geeky.png';
+import art from '../../assets/images/categories-icons/art.png';
+import healthyLiving from '../../assets/images/categories-icons/healthy.png';
+import craft from '../../assets/images/categories-icons/hobbies.png';
+import movie from '../../assets/images/categories-icons/movie.png';
+import personality from '../../assets/images/categories-icons/personality.png';
+import spiritual from '../../assets/images/categories-icons/spiritual.png';
+import student from '../../assets/images/categories-icons/student.png';
+import occupation from '../../assets/images/categories-icons/work.png';
+import sport from '../../assets/images/categories-icons/sport.png';
 
 const mainCategories = [
     new MainCategory(1, 'Sport', sport),
-    new MainCategory(2, 'Foodie', foodie),
+    new MainCategory(2, 'Foodie', pizza),
     new MainCategory(3, 'Movie', movie),
     new MainCategory(4, 'Personality', personality),
     new MainCategory(5, 'Geeky', geeky),

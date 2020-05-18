@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import { Provider } from 'react-redux';
@@ -8,6 +9,17 @@ import createSagaMiddleware from 'redux-saga';
 import Navigator from './navigation/Navigator';
 import categoryReducer from './store/categories/reducer';
 import rootSaga from './store/saga';
+
+const MyTheme = {
+  dark: false,
+  colors: {
+    primary: 'rgb(255, 45, 85)',
+    background: 'rgb(255, 255, 255)',
+    card: 'rgb(255, 255, 255)',
+    text: 'rgb(28, 28, 30)',
+    border: 'rgb(199, 199, 204)',
+  },
+};
 
 const rootReducer = combineReducers({
   categories: categoryReducer, 
@@ -44,7 +56,9 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <Navigator />
+      <NavigationContainer theme={MyTheme}>
+        <Navigator />
+      </NavigationContainer>
     </Provider>
   )
 }

@@ -12,7 +12,8 @@ import { storeReleventSubCategories, searchSubCategories } from '../../store/cat
 
 const styles = StyleSheet.create({
     container: {
-        height: '100%'
+        height: '100%',
+        backgroundColor: 'white'
     },
     noMainCategoriesSelected: {
         
@@ -147,7 +148,7 @@ const SubCategories = (props) => {
     };
 
     return (
-        <View>
+        <View style={styles.container}>
             {selectedMainCategories.length === 0 ? 
             renderNoMainCategoriesSelectedMessgae()
             :
