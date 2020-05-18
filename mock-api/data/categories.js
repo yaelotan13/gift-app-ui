@@ -47,7 +47,7 @@ const mainCategories = [
     new MainCategory(4, 'Personality', personality),
     new MainCategory(5, 'Geeky', geeky),
     new MainCategory(6, 'Healty Living', healthyLiving),
-    new MainCategory(7, 'Hobbies', craft),
+    new MainCategory(7, 'Crafts', craft),
     new MainCategory(8, 'Art', art),
     new MainCategory(9, 'Gadgets', gadget),
     new MainCategory(10, 'Occupation', occupation),

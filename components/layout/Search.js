@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
 
 const Search = (props) => {
     const { value, onChange, placeholder } = props;
-    console.log(placeholder);
+
     return (
         <View style={styles.inputContainer}>
             <AntDesign style={styles.icon} name="search1" size={20} color={colors.superLightGrey} />

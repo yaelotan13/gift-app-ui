@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         width: '90%',
         marginLeft: '5%',
         marginTop: '5%',
+        marginBottom: '5%',
         borderRadius: 15,
         padding: 20,
         shadowColor: colors.black,
@@ -96,23 +97,25 @@ const SubCategories = (props) => {
         dispatch(storeReleventSubCategories(subCategories));
     }, [subCategories]);
 
-    const categoryPressed = (subCategory) => {
-        if (selected.indexOf(subCategory) < 0) {
+    const categoryPressed = (subCategoryId) => {
+        if (selected.indexOf(subCategoryId) < 0) {
+            setSelected(selected => selected.concat(subCategoryId));
             console.log('adding the sub category');
-            console.log(subCategory);
-            console.log(selected);
-            setSelected(selected => selected.concat(subCategory))
+            console.log(subCategoryId);
         } else {
-            console.log('deleting the sub category');
-            console.log(subCategory);
-            console.log(selected);
-            setSelected(selected => selected.filter(category => category !== subCategory));
+            setSelected(selected => selected.filter(categoryId => categoryId !== subCategoryId));
+            console.log('removing the sub category');
+            console.log(subCategoryId);
         }
     };
 
+    console.log(selected);
+
+    const getStyle = (subCategoryId) => selected.indexOf(subCategoryId) > 0 ? [styles.subCategory, styles.heighlight] : styles.subCategory;
+
     const renderSubCategory = (itemData) => (
         <TouchableOpacity onPress={() => categoryPressed(itemData.item.sub_category_id)}>
-            <View style={selected.indexOf(itemData.item.sub_category_id) > 0 ? [styles.subCategory, styles.heighlight] : styles.subCategory}>
+            <View style={getStyle(itemData.item.sub_category_id)}>
                 <Text style={styles.subCategoryTitle}>{itemData.item.sub_category_name}</Text>
             </View>
         </TouchableOpacity>
@@ -128,7 +131,7 @@ const SubCategories = (props) => {
                     style={styles.subCategoriesItemsContainer}
                     data={releventSubCategories}
                     renderItem={renderSubCategory}
-                    keyExtractor={itemData => itemData.sub_category_id}
+                    keyExtractor={itemData => itemData.sub_category_id.toString()}
                 />
             </View>
         )
