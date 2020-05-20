@@ -9,13 +9,16 @@ import DiscoverScreen from '../screens/Discover';
 import MainCategoriesScreen from '../screens/MainCategories';
 import SubCategoriesScreen from '../screens/SubCategories';
 import PersonalDetailsScreen from '../screens/PersonalDetails';
+import ResultProductsScreen from '../screens/ResultProducts';
 
 import Progress from '../components/layout/Progress';
 
 const Navigator = createStackNavigator({
     Discover: {
         screen: DiscoverScreen, 
-        navigationOptions: { title: '' },
+        navigationOptions: { 
+            title: '' 
+        },
     },
     MainCategories: {
         screen: MainCategoriesScreen,
@@ -35,6 +38,12 @@ const Navigator = createStackNavigator({
             title: <Progress curScreen="PersonalDetails" />, 
         },
     }, 
+    ResultProducts: {
+        screen: ResultProductsScreen,
+        navigationOptions: { 
+            title: ' ', 
+        },
+    }
 });
 
 export default createAppContainer(Navigator);
