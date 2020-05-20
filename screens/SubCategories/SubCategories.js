@@ -7,7 +7,7 @@ import { useSelector } from '../../hooks';
 import { categoriesSelector, filteredSubCategoriesSelector } from '../../store/selectors/categories';
 import HeaderButton from '../../navigation/HeaderButton';
 import colors from '../../constants/colors';
-import { Header, Search } from '../../components/layout';
+import { Header, Search, SecondaryButton } from '../../components/layout';
 import { storeReleventSubCategories, searchSubCategories } from '../../store/categories/actions';
 import { SubCategoriesContainer, NoSubCategories } from './components';
 
@@ -76,7 +76,7 @@ const SubCategories = (props) => {
                 renderItem={renderSubCategories}
                 keyExtractor={itemData => itemData.main_category_id.toString()}
                 numColumns={1}
-                ListFooterComponent={<Text></Text>}
+                ListFooterComponent={<SecondaryButton handlePress={() => props.navigation.navigate({ routeName: 'PersonalDetails' })} accessibilityLabel="Next" buttonTitle="Next" />}
                 ListFooterComponentStyle={styles.footer}
             />}
         </View>
