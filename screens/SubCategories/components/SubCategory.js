@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 const SubCategory = (props) => {
     const { itemData, selected, setSelected } = props;
 
-    const getStyle = (subCategoryId) => selected.indexOf(subCategoryId) > 0 ? [styles.subCategory, styles.heighlight] : styles.subCategory;
+    const getStyle = subCategoryId => selected.indexOf(subCategoryId) > -1 ? [styles.subCategory, styles.heighlight] : styles.subCategory;
 
     const categoryPressed = (subCategoryId) => {
         if (selected.indexOf(subCategoryId) < 0) {
@@ -39,6 +39,8 @@ const SubCategory = (props) => {
             console.log(subCategoryId);
         }
     };
+
+    console.log(selected);
 
     return (
         <TouchableOpacity onPress={() => categoryPressed(itemData.item.sub_category_id)}>
