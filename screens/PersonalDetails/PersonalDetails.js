@@ -8,6 +8,9 @@ import HeaderButton from '../../navigation/HeaderButton';
 import { Header } from '../../components/layout';
 import colors from '../../constants/colors';
 import { Question } from './components';
+import { useSelector } from '../../hooks';
+import { recipientSelector } from '../../store/selectors/recipent';
+import { storeRecipientAge, storeRecipientGender, storeRecipientOcassion, storeRecipientRelationship, storeRecipientPrice } from '../../store/recipientInfo/actions';
 
 const styles = StyleSheet.create({
     conatiner: {
@@ -17,7 +20,7 @@ const styles = StyleSheet.create({
     buttonContainer: {
         marginLeft: '10%',
         width: '80%',
-        marginTop: '8%',
+        marginTop: '16%',
         marginBottom: '10%',
         flexDirection: 'row',
         alignItems: 'center',
@@ -56,7 +59,8 @@ const styles = StyleSheet.create({
 const PersonalDetails = (props) => {
     const dispatch = useDispatch();
     const [personalInfo, setPersonalInfo] = useState({});
-    console.log(personalInfo);
+    const recipentState = useSelector(recipientSelector);
+    console.log(recipentState);
     
     const getRecipients = (gender) => {
         switch (gender) {
@@ -117,9 +121,10 @@ const PersonalDetails = (props) => {
     
     const submitPressed = () => {
         console.log('showing products!!');
+        props.navigation.navigate({ routeName: 'ResultProducts' })
     };
 
-    const enabled = () => personalInfo.gender && personalInfo.recipent && personalInfo.occastion;
+    const enabled = () => recipentState.gender && recipentState.relationship && recipentState.ocassion;
 
     return (
         <SafeAreaView style={styles.conatiner}>
@@ -127,48 +132,38 @@ const PersonalDetails = (props) => {
                 <Header header="Let’s Get Personal" subHeader="Just a few more questions, so we could find the perfect gift." />
                 <View style={styles.questionsConatiner}>
                     <Question 
-                        question="Gender of the recipient" 
-                        data={[{value: "Female"}, {value: "Male"}]} 
-                        onPress={(value) => setPersonalInfo(pervState => {
-                            const newState = { ...pervState };
-                            newState.gender = value;
-                            return newState;
-                        })}
-                        selected={personalInfo.gender}
+                        question="Price Range" 
+                        data={[{ value: "All Prices" }, { value: "Up to $10" }, { value: "Up to $20" }, { value: "Up to $30" }, { value: "$30 to $50" }, { value: "$50 to $100" }, { value: "$100 to $200" }, { value: "Over $200" }]} 
+                        onPress={age => dispatch(storeRecipientGender(age))}
+                        selected={recipentState.price}
                     />
-                    {personalInfo.gender &&
+                    <Question 
+                        question="Gender" 
+                        data={[{ value: "Female" }, { value: "Male" }]} 
+                        onPress={age => dispatch(storeRecipientGender(age))}
+                        selected={recipentState.gender}
+                    />
+                    {recipentState.gender &&
                     <Question 
                         question="Who is the present for?" 
-                        data={getRecipients(personalInfo.gender)} 
-                        onPress={(value) => setPersonalInfo(pervState => {
-                            const newState = { ...pervState };
-                            newState.recipent = value;
-                            return newState;
-                        })}
-                        selected={personalInfo.recipent}
+                        data={getRecipients(recipentState.gender)} 
+                        onPress={relationship => dispatch(storeRecipientRelationship(relationship))}
+                        selected={recipentState.relationship}
                     />}
-                    {personalInfo.recipent && 
+                    {recipentState.relationship && 
                     <Question 
                         question="What's the occasion?" 
-                        data={getOccasion(personalInfo.recipent)} 
-                        onPress={(value) => setPersonalInfo(pervState => {
-                            const newState = { ...pervState };
-                            newState.occastion = value;
-                            return newState;
-                        })}
-                        selected={personalInfo.occastion}
+                        data={getOccasion(recipentState.relationship)} 
+                        onPress={ocassion => dispatch(storeRecipientOcassion(ocassion))}
+                        selected={recipentState.ocassion}
                     />}
-                    {personalInfo.occastion &&
-                    shouldAskAboutAge(personalInfo.recipent) &&
+                    {recipentState.ocassion &&
+                    shouldAskAboutAge(recipentState.relationship) &&
                     <Question 
                         question="Age" 
                         data={[{ value: 'All' }, { value: 'Baby' }, { value: 'Toddler' }, { value: 'Kid 4-7' }, { value: 'Kid 8-12' }, { value: 'Teen' }, { value: 'Adult' }]} 
-                        onPress={(value) => setPersonalInfo(pervState => {
-                            const newState = { ...pervState };
-                            newState.age = value;
-                            return newState;
-                        })}
-                        selected={personalInfo.age}
+                        onPress={age => dispatch(storeRecipientAge(age))}
+                        selected={recipentState.age}
                     />}
                 </View>
                 <View style={styles.buttonContainer}>
@@ -193,10 +188,9 @@ const PersonalDetails = (props) => {
 PersonalDetails.navigationOptions = navigationData => {
     return {
         headerRight: () =>
-        <Text color={colors.secondaryDark} onPress={() => navigationData.navigation.navigate({ routeName: 'PersonalDetails' })}>Skip</Text>,
-        // <HeaderButtons HeaderButtonComponent={HeaderButton}>
-        //     <Item title='Next' iconName="rightcircle" color={colors.primary} onPress={() => navigationData.navigation.navigate({ routeName: 'PersonalDetails' })} />
-        // </HeaderButtons>,
+        <HeaderButtons HeaderButtonComponent={HeaderButton}>
+            <Item title='Skip' color={colors.secondaryDark} onPress={() => navigationData.navigation.navigate({ routeName: 'ResultProducts' })} />
+        </HeaderButtons>,
         headerLeft: () =>
         <HeaderButtons HeaderButtonComponent={HeaderButton}>
             <Item title='Prev' iconName="leftcircle" color={colors.primary} onPress={() => navigationData.navigation.navigate({ routeName: 'SubCategories' })} />

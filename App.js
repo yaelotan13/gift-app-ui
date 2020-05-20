@@ -8,6 +8,8 @@ import createSagaMiddleware from 'redux-saga';
 
 import Navigator from './navigation/Navigator';
 import categoryReducer from './store/categories/reducer';
+import recipientReducer from './store/recipientInfo/reducer';
+import productsReducer from './store/products/reducer';
 import rootSaga from './store/saga';
 
 const MyTheme = {
@@ -22,7 +24,9 @@ const MyTheme = {
 };
 
 const rootReducer = combineReducers({
-  categories: categoryReducer, 
+  categories: categoryReducer,
+  recipient: recipientReducer, 
+  products: productsReducer
 });
 
 const sagaMiddleware = createSagaMiddleware();

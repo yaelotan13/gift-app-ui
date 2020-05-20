@@ -1,8 +1,9 @@
 import { call, put } from "@redux-saga/core/effects";
 
-import * as categoriesActionTypes from '../../store/categories/actionTypes';
+import * as categoriesActionTypes from '../categories/actionTypes';
+import * as productsActionTypes from '../products/acionTypes';
 
-import { categoriesService } from '../../services';
+import { categoriesService, productsService } from '../../services';
 
 export function* FetchAllCategories() {
     try {
@@ -14,6 +15,21 @@ export function* FetchAllCategories() {
     } catch (error) {
         yield put({
             type: categoriesActionTypes.FETCH_ALL_CATEGORIES_FAILURE, 
+            payload: error
+        });
+    }
+}
+
+export function* FetchProducts() {
+    try {
+        const result = yield call(productsService.fetchProducts);
+        yield put({
+            type: productsActionTypes.FETCH_PRODUCTS_SUCCESS, 
+            payload: result
+        });
+    } catch (error) {
+        yield put({
+            type: productsActionTypes.FETCH_PRODUCTS_FAILURE, 
             payload: error
         });
     }
