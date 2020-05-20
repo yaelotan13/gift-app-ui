@@ -7,12 +7,21 @@ const styles = StyleSheet.create({
     buttonContainer: {
         marginLeft: '22%' 
     },
+    smallButtonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        paddingRight: '4%',
+    },
     button: {
         width: 212,
         height: 50,
         borderRadius: 60,
         backgroundColor: colors.primary,
         justifyContent: 'center'
+    },
+    smallButton: {
+        width: '33%',
+        height: 40,
     },
     buttonTitle: {
         color: colors.white,
@@ -23,12 +32,12 @@ const styles = StyleSheet.create({
 });
 
 const PrimaryButton = (props) => {
-    const { handlePress, accessibilityLabel, buttonTitle } = props;
+    const { handlePress, accessibilityLabel, buttonTitle, small } = props;
 
     return (
-        <View style={styles.buttonContainer}>
+        <View style={small ? [styles.buttonContainer, styles.smallButtonContainer] : styles.buttonContainer}>
             <TouchableOpacity
-                style={styles.button}
+                style={small ? [styles.button, styles.smallButton] : styles.button}
                 onPress={handlePress}
                 underlayColor='#fff'
                 accessibilityLabel={accessibilityLabel}

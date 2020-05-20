@@ -5,7 +5,7 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import HeaderButton from '../../navigation/HeaderButton';
 import colors from '../../constants/colors';
-import { Header, Search, SecondaryButton } from '../../components/layout';
+import { Header, Search, PrimaryButton } from '../../components/layout';
 import { storeSelecedMainCategories, searchMainCategories } from '../../store/categories/actions';
 import { categoriesSelector, filteredMainCategoriesSelector } from '../../store/selectors/categories';
 import { useSelector } from '../../hooks';
@@ -65,7 +65,7 @@ const MainCategories = (props) => {
                 numColumns={3}
                 keyExtractor={itemData => itemData.main_category_id + " "}
                 style={styles.mainCategoriesContainer}
-                ListFooterComponent={<SecondaryButton handlePress={() => props.navigation.navigate({ routeName: 'SubCategories' })} accessibilityLabel="Next" buttonTitle="Next" />}
+                ListFooterComponent={<PrimaryButton small handlePress={() => props.navigation.navigate({ routeName: 'SubCategories' })} accessibilityLabel="Next" buttonTitle="Next" />}
                 ListFooterComponentStyle={styles.footer}
             />}
         </View>
