@@ -1,7 +1,13 @@
-import { shouldAskAboutAge, getOccasion, getRecipients } from './util';
+import { shouldAskAboutAge, getOccasion, getRecipients, enabled } from './utilFunctions';
+import { questions } from './utilData';
 
-export {
+export const utilFuncs = {
     shouldAskAboutAge,
     getOccasion,
-    getRecipients
+    getRecipients,
+    enabled
+};
+
+export const utilData = {
+    questions
 }
