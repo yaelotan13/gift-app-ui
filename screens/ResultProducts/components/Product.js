@@ -6,9 +6,10 @@ import Star from './Star';
 
 const styles = StyleSheet.create({
     container: {
-        width: '45%',
+        width: '86%',
         borderRadius: 20,
-        margin: '2%',
+        marginHorizontal: '6%',
+        marginVertical: '3%',
         backgroundColor: 'white',
         shadowColor: 'black',
         shadowOffset: {

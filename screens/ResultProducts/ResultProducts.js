@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Text, View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useDispatch } from 'react-redux';
 
@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     productsContainer: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
+        // flexDirection: 'row',
+        // flexWrap: 'wrap',
         marginHorizontal: '5%',
         height: '100%',
         marginBottom: 100
@@ -32,7 +32,7 @@ const ResultProducts = (props) => {
     useEffect(() => {
         dispatch(fetchProducts());
     }, []);
-
+    
     return (
         <ScrollView style={styles.container}>
             <Header header="Let's See What We Got" />
