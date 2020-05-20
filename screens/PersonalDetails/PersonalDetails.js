@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
 
 const PersonalDetails = (props) => {
     const dispatch = useDispatch();
-    const [personalInfo, setPersonalInfo] = useState({});
     const recipentState = useSelector(recipientSelector);
     console.log(recipentState);
     
@@ -119,7 +118,7 @@ const PersonalDetails = (props) => {
 
     const shouldAskAboutAge = recipient => recipient === 'Sister'|| recipient === 'Brother' || recipient === 'Friend' || recipient === 'Child';
     
-    const submitPressed = () => {
+    const showResultScreen = () => {
         console.log('showing products!!');
         props.navigation.navigate({ routeName: 'ResultProducts' })
     };
@@ -168,11 +167,11 @@ const PersonalDetails = (props) => {
                 </View>
                 <View style={styles.buttonContainer}>
                     <View style={styles.skipButton} >
-                        <Button title="Skip" color={colors.secondaryDark} />
+                        <Button title="Skip" color={colors.secondaryDark} onPress={showResultScreen} />
                     </View>
                     <TouchableOpacity
                         style={enabled() ? [styles.button, styles.enabled] : [styles.button, styles.disabled]}
-                        onPress={enabled() ? submitPressed : null}
+                        onPress={enabled() ? showResultScreen : null}
                         underlayColor='#fff'
                         accessibilityLabel="Show selected gifts"
                     >
