@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { StyleSheet, Text, FlatList, View } from 'react-native';
+import { StyleSheet, FlatList, View } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import { useSelector } from '../../hooks';
 import { categoriesSelector, filteredSubCategoriesSelector } from '../../store/selectors/categories';
 import HeaderButton from '../../navigation/HeaderButton';
 import colors from '../../constants/colors';
-import { Header, Search, SecondaryButton } from '../../components/layout';
+import { Header, Search, PrimaryButton } from '../../components/layout';
 import { storeReleventSubCategories, searchSubCategories } from '../../store/categories/actions';
 import { SubCategoriesContainer, NoSubCategories } from './components';
 
@@ -76,7 +76,7 @@ const SubCategories = (props) => {
                 renderItem={renderSubCategories}
                 keyExtractor={itemData => itemData.main_category_id.toString()}
                 numColumns={1}
-                ListFooterComponent={<SecondaryButton handlePress={() => props.navigation.navigate({ routeName: 'PersonalDetails' })} accessibilityLabel="Next" buttonTitle="Next" />}
+                ListFooterComponent={<PrimaryButton small handlePress={() => props.navigation.navigate({ routeName: 'PersonalDetails' })} accessibilityLabel="Next" buttonTitle="Next" />}
                 ListFooterComponentStyle={styles.footer}
             />}
         </View>

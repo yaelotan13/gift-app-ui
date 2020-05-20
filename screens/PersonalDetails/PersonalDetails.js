@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, Button, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, SafeAreaView, ScrollView, Button, TouchableOpacity } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import { AntDesign } from '@expo/vector-icons';
 
 import HeaderButton from '../../navigation/HeaderButton';
-import { Header } from '../../components/layout';
+import { Header, PrimaryButton, SecondaryButton } from '../../components/layout';
 import colors from '../../constants/colors';
 import { Question } from './components';
 import { useSelector } from '../../hooks';
 import { recipientSelector } from '../../store/selectors/recipent';
 import { storeRecipientAge, storeRecipientGender, storeRecipientOcassion, storeRecipientRelationship, storeRecipientPrice } from '../../store/recipientInfo/actions';
+
+import { getRecipients, getOccasion, shouldAskAboutAge } from './util';
 
 const styles = StyleSheet.create({
     conatiner: {
@@ -18,16 +19,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     buttonContainer: {
-        marginLeft: '10%',
-        width: '80%',
+        marginLeft: '15%',
+        width: '50%',
         marginTop: '16%',
         marginBottom: '10%',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-around'
-    },
-    skipButton: {
-        height: 30
+        justifyContent: 'space-around',
     },
     button: {
         width: 212,
@@ -44,13 +42,6 @@ const styles = StyleSheet.create({
     disabled: {
         backgroundColor: colors.superLightGrey,
     },
-    discoverText: {
-        color: colors.white,
-        textAlign:'center',
-        paddingLeft : 10,
-        paddingRight : 10,
-        flex: 4
-    },
     icon: {
         flex: 1
     }
@@ -61,65 +52,7 @@ const PersonalDetails = (props) => {
     const recipentState = useSelector(recipientSelector);
     console.log(recipentState);
     
-    const getRecipients = (gender) => {
-        switch (gender) {
-            case 'Female' : {
-                return [{ value: 'Mom' }, { value: 'Grandma' }, { value: 'Sister' },  { value: 'Girlfriend' }, { value: 'Wife' }, { value: 'Friend'}, { value: 'Child' }]
-            }
-            case 'Male' : {
-                return [{ value: 'Dad' }, { value: 'Grandpa' }, { value: 'Brother' },  { value: 'Boyfriend' }, { value: 'Husband' }, { value: 'Friend'}, { value: 'Child' }]
-            }
-            default : {
-                return [{ value: 'Friend' }, { value: 'Child' }]
-            }
-        }
-    };
-
-    const getOccasion = (recipient) => {
-        switch (recipient) {
-            case 'Mom': {
-                return [{ value: 'Birthday' }, { value: "Mother's day" }, { value: 'Holiday'}, { value: 'To say Thanks'}, { value: 'No special occasion'}]
-            }
-            case 'Dad': {
-                return [{ value: 'Birthday' }, { value: "Father's day" }, { value: 'Holiday'}, { value: 'To say Thanks'}, { value: 'No special occasion'}]
-            }
-            case 'Sister': {
-                return [{ value: 'Birthday' }, { value: "Family day" }, { value: 'Holiday'}, { value: 'To say Thanks'}, { value: 'No special occasion'}, { value: 'Graduation'}, { value: 'New child'}]
-            }
-            case 'Brother': {
-                return [{ value: 'Birthday' }, { value: "Family day" }, { value: 'Holiday'}, { value: 'To say Thanks'}, { value: 'No special occasion'}, { value: 'Graduation'}, { value: 'New child'}]
-            }
-            case 'Grandma': {
-                return [{ value: 'Birthday' }, { value: "Family day" }, { value: 'Holiday'}, { value: 'To say Thanks'}, { value: 'No special occasion'}]
-            }
-            case 'Grandpa': {
-                return [{ value: 'Birthday' }, { value: "Family day" }, { value: 'Holiday'}, { value: 'To say Thanks'}, { value: 'No special occasion'}]
-            }            
-            case 'Girlfriend': {
-                return [{ value: 'Birthday' }, { value: 'Holiday'}, { value: 'Anniversary' }, { value: 'To say Thanks'}, { value: 'No special occasion'}]
-            }
-            case 'Boyfriend': {
-                return [{ value: 'Birthday' }, { value: 'Holiday'}, { value: 'Anniversary' }, { value: 'To say Thanks'}, { value: 'No special occasion'}]
-            }
-            case 'Husband': {
-                return [{ value: 'Birthday' }, { value: 'Holiday'}, { value: 'Anniversery' }, { value: 'To say Thanks'}, { value: 'No special occasion'}]
-            }
-            case 'Wife': {
-                return [{ value: 'Birthday' }, { value: 'Holiday'}, { value: 'Anniversery' }, { value: 'To say Thanks'}, { value: 'No special occasion'}]
-            }
-            case 'Friend': {
-                return [{ value: 'Birthday' }, { value: 'Holiday'}, { value: 'New House' }, { value: 'New Child' }, { value: 'Graduation' }, { value: 'To say Thanks'}, { value: 'No special occasion'}]
-            }
-            case 'Child': {
-                return [{ value: 'Birthday' }, { value: 'Holiday'}, { value: 'New House' }, { value: 'New Child' }, { value: 'Graduation' }, { value: 'To say Thanks'}, { value: 'No special occasion'}]
-            }
-        }
-    };
-
-    const shouldAskAboutAge = recipient => recipient === 'Sister'|| recipient === 'Brother' || recipient === 'Friend' || recipient === 'Child';
-    
     const showResultScreen = () => {
-        console.log('showing products!!');
         props.navigation.navigate({ routeName: 'ResultProducts' })
     };
 
@@ -133,13 +66,13 @@ const PersonalDetails = (props) => {
                     <Question 
                         question="Price Range" 
                         data={[{ value: "All Prices" }, { value: "Up to $10" }, { value: "Up to $20" }, { value: "Up to $30" }, { value: "$30 to $50" }, { value: "$50 to $100" }, { value: "$100 to $200" }, { value: "Over $200" }]} 
-                        onPress={age => dispatch(storeRecipientGender(age))}
+                        onPress={price => dispatch(storeRecipientPrice(price))}
                         selected={recipentState.price}
                     />
                     <Question 
                         question="Gender" 
                         data={[{ value: "Female" }, { value: "Male" }]} 
-                        onPress={age => dispatch(storeRecipientGender(age))}
+                        onPress={gender => dispatch(storeRecipientGender(gender))}
                         selected={recipentState.gender}
                     />
                     {recipentState.gender &&
@@ -166,18 +99,8 @@ const PersonalDetails = (props) => {
                     />}
                 </View>
                 <View style={styles.buttonContainer}>
-                    <View style={styles.skipButton} >
-                        <Button title="Skip" color={colors.secondaryDark} onPress={showResultScreen} />
-                    </View>
-                    <TouchableOpacity
-                        style={enabled() ? [styles.button, styles.enabled] : [styles.button, styles.disabled]}
-                        onPress={enabled() ? showResultScreen : null}
-                        underlayColor='#fff'
-                        accessibilityLabel="Show selected gifts"
-                    >
-                        <Text style={styles.discoverText}>Your Gifts</Text>
-                        <AntDesign style={styles.icon} name="arrowright" size={24} color="white" />
-                    </TouchableOpacity>
+                    <SecondaryButton handlePress={showResultScreen} buttonTitle="Skip" color={colors.secondaryDark} />
+                    <PrimaryButton handlePress={enabled() ? showResultScreen : null} accessibilityLabel="Show selected gifts" buttonTitle="Your Gifts" />
                 </View>
             </ScrollView>
         </SafeAreaView>
