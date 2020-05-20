@@ -40,7 +40,7 @@ const PrimaryButton = (props) => {
     return (
         <View style={small ? [styles.buttonContainer, styles.smallButtonContainer] : styles.buttonContainer}>
             <TouchableOpacity
-                style={small ? [styles.button, styles.smallButton] : disabled ? styles.disabled : styles.button}
+                style={small ? [styles.button, styles.smallButton] : disabled ? [styles.button, styles.disabled] : styles.button}
                 onPress={handlePress}
                 underlayColor='#fff'
                 accessibilityLabel={accessibilityLabel}
