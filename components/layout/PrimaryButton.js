@@ -19,6 +19,9 @@ const styles = StyleSheet.create({
         backgroundColor: colors.primary,
         justifyContent: 'center'
     },
+    disabled: {
+        backgroundColor: colors.superLightGrey,
+    },
     smallButton: {
         width: '33%',
         height: 40,
@@ -32,12 +35,12 @@ const styles = StyleSheet.create({
 });
 
 const PrimaryButton = (props) => {
-    const { handlePress, accessibilityLabel, buttonTitle, small } = props;
+    const { handlePress, accessibilityLabel, buttonTitle, small, disabled } = props;
 
     return (
         <View style={small ? [styles.buttonContainer, styles.smallButtonContainer] : styles.buttonContainer}>
             <TouchableOpacity
-                style={small ? [styles.button, styles.smallButton] : styles.button}
+                style={small ? [styles.button, styles.smallButton] : disabled ? styles.disabled : styles.button}
                 onPress={handlePress}
                 underlayColor='#fff'
                 accessibilityLabel={accessibilityLabel}
